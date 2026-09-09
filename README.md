@@ -34,7 +34,28 @@ A Blank Document opens up into which the following source code can be typed.
 To verify the Functionality using the Test Bench
 
 #### Source Code – Using Case Statement :
-(Include program here)
+module alu_case (
+    output reg [31:0] y,
+    input  [31:0] a,
+    input  [31:0] b,
+    input  [2:0]  f
+);
+
+always @(*) begin
+    case (f)
+        3'b000: y = a & b;        // AND Operation
+        3'b001: y = a | b;        // OR Operation
+        3'b010: y = ~(a & b);     // NAND Operation
+        3'b011: y = ~(a | b);     // NOR Operation
+        3'b100: y = a ^ b;        // XOR Operation
+        3'b101: y = a + b;        // Addition
+        3'b110: y = a - b;        // Subtraction
+        3'b111: y = a * b;        // Multiplication
+        default: y = 32'bx;
+    endcase
+end
+
+endmodule
 
 Use the Save option or Ctrl+S to save the code, or click on the save option from the top-right corner and close the text file.
 
@@ -42,15 +63,116 @@ Use the Save option or Ctrl+S to save the code, or click on the save option from
 Similarly, create your test bench using gedit <filename_tb>.v to open a new blank document (alu_case_tb.v).
 
 #### Test Bench :
-(Include test bench program here)
+module alu_case_tb;
+
+    reg  [31:0] a;
+    reg  [31:0] b;
+    reg  [2:0]  f;
+    wire [31:0] y;
+
+    alu_case dut (
+        .y(y),
+        .a(a),
+        .b(b),
+        .f(f)
+    );
+
+    initial begin
+        a = 32'h00000000;
+        b = 32'h00110001;
+
+        #10 f = 3'b000;
+        #10 f = 3'b001;
+        #10 f = 3'b010;
+        #10 f = 3'b011;
+        #10 f = 3'b100;
+        #10 f = 3'b101;
+        #10 f = 3'b110;
+        #10 f = 3'b111;
+    end
+
+    initial begin
+        #100 $finish;
+    end
+
+endmodule
 
 Use the Save option or Ctrl+S to save the code, or click on the save option from the top-right corner and close the text file.
 
 #### Source Code - Using If Statement :
-(Include program here)
+module alu_ifelseif (
+    output reg [31:0] y,
+    input  [31:0] a,
+    input  [31:0] b,
+    input  [2:0]  f
+);
+
+always @(*) begin
+    if (f == 3'b000)
+        y = a & b;          // AND Operation
+
+    else if (f == 3'b001)
+        y = a | b;          // OR Operation
+
+    else if (f == 3'b010)
+        y = ~(a & b);       // NAND Operation
+
+    else if (f == 3'b011)
+        y = ~(a | b);       // NOR Operation
+
+    else if (f == 3'b100)
+        y = a ^ b;          // XOR Operation
+
+    else if (f == 3'b101)
+        y = a + b;          // Addition
+
+    else if (f == 3'b110)
+        y = a - b;          // Subtraction
+
+    else if (f == 3'b111)
+        y = a * b;          // Multiplication
+
+    else
+        y = 32'bx;
+
+end
+
+endmodule
 
 #### Test Bench :
-(Include program here)
+module alu_ifelseif_tb;
+
+    reg  [31:0] a;
+    reg  [31:0] b;
+    reg  [2:0]  f;
+    wire [31:0] y;
+
+    alu_ifelseif dut (
+        .y(y),
+        .a(a),
+        .b(b),
+        .f(f)
+    );
+
+    initial begin
+        a = 32'h00000000;
+        b = 32'h00110001;
+
+        #10 f = 3'b000;
+        #10 f = 3'b001;
+        #10 f = 3'b010;
+        #10 f = 3'b011;
+        #10 f = 3'b100;
+        #10 f = 3'b101;
+        #10 f = 3'b110;
+        #10 f = 3'b111;
+    end
+
+    initial begin
+        #100 $finish;
+    end
+
+endmodule
 
 Functional Simulation for each design
 
@@ -63,6 +185,9 @@ source /cadence/install/cshrc (mention the path of the tools)
 (The path of cshrc could vary depending on the installation destination)
 
 After this, you can see the window like below
+<img width="1917" height="1021" alt="647389068-2730f985-e177-49c0-9e1b-7d35a44d63f3" src="https://github.com/user-attachments/assets/a894eaf4-7710-401b-8fe0-8f9fa948291d" />
+<img width="1920" height="1080" alt="Screenshot 2026-07-24 152853" src="https://github.com/user-attachments/assets/1f11fa76-d384-499b-99fb-cb5d526073e4" />
+
 
 To Launch the Simulation tool
 
@@ -75,6 +200,8 @@ or
 It will invoke the nclaunch window for functional simulation. We can compile, elaborate and simulate it using Multiple Steps.
 
 Setting Multi-step simulation
+<img width="1917" height="1021" alt="image" src="https://github.com/user-attachments/assets/0084fbe3-6389-48d6-840d-00a30e6dcad8" />
+
 
 Select Multiple Step and then select “Create cds.lib File” as shown in the figure below
 
@@ -87,6 +214,8 @@ Save .lib file and select the correct option for cds.lib file format based on th
 Select “Don’t include any libraries (verilog design)” from “New cds.lib file” and click on “OK” as in the figure below.
 
 We are simulating a verilog design without using any libraries
+<img width="1719" height="915" alt="image" src="https://github.com/user-attachments/assets/52919b33-3a8d-42c7-b15d-6c0e7f6c69c4" />
+
 
 Click “OK” in the “nclaunch: Open Design Directory” window, as shown in the figure below
 
@@ -120,6 +249,8 @@ i.e Cadence IES command for compile: ncverilog +access+rwc -compile filename.v
 Left side select the file and in Tools: launch verilog compiler with current selection will get enable. Click it to compile the code
 
 Worklib is the directory where all the compiled codes are stored while Snapshot will have output of elaboration which in turn goes for simulation
+<img width="1722" height="913" alt="ChatGPT Image Sep 8, 2026, 10_30_28 PM" src="https://github.com/user-attachments/assets/01a7489f-fef6-4eee-a845-4a7a9e36c0b6" />
+
 
 #### Fig 4: Compiled database in WorkLib
 After compilation, it will come under worklib. You can see on the right side window
@@ -177,6 +308,8 @@ Synthesis requires three files as follows,
 ##### Performing Synthesis
 
 ##### Synthesize Design
+<img width="2172" height="724" alt="image" src="https://github.com/user-attachments/assets/23167537-dac5-4974-aed8-6135904129a8" />
+
 
 Run the synthesis Process one time for each code and make sure the output File names are changed accordingly
 
@@ -189,10 +322,16 @@ The Liberty files are present in the library path,
 • Genus Script file with .tcl file Extension commands are executed one by one to synthesize the netlist. Or use source run.tcl command in the terminal window to view the netlist, and a log file will be created in the working folder.
 
 #### Fig 8: Synthesis RTL Schematic using case and ifelseif construct
+<img width="1671" height="941" alt="image" src="https://github.com/user-attachments/assets/b8ab18cb-ab7d-4f4a-bd39-f1c57fe1e855" />
+
 
 #### Fig 9: Area report of case and ifelseif construct
+<img width="2172" height="724" alt="image" src="https://github.com/user-attachments/assets/063c550b-c06c-431f-8936-37a6671330e8" />
+
 
 #### Fig 10: Power Report of case and ifelseif construct
+<img width="2172" height="724" alt="image" src="https://github.com/user-attachments/assets/f4bc8a0a-1b2d-4bef-ab91-1f79faf3cf47" />
+
 
 #### Fig 11: Timing Report of case and ifelseif construct
 
