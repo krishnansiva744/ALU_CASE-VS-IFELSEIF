@@ -186,7 +186,7 @@ source /cadence/install/cshrc (mention the path of the tools)
 
 After this, you can see the window like below
 <img width="1917" height="1021" alt="647389068-2730f985-e177-49c0-9e1b-7d35a44d63f3" src="https://github.com/user-attachments/assets/a894eaf4-7710-401b-8fe0-8f9fa948291d" />
-<img width="1920" height="1080" alt="Screenshot 2026-07-24 152853" src="https://github.com/user-attachments/assets/1f11fa76-d384-499b-99fb-cb5d526073e4" />
+<img width="1671" height="941" alt="Image" src="https://github.com/user-attachments/assets/d1c22af4-2845-4868-9537-80ee749a59a5" />
 
 
 To Launch the Simulation tool
@@ -200,7 +200,6 @@ or
 It will invoke the nclaunch window for functional simulation. We can compile, elaborate and simulate it using Multiple Steps.
 
 Setting Multi-step simulation
-<img width="1917" height="1021" alt="image" src="https://github.com/user-attachments/assets/0084fbe3-6389-48d6-840d-00a30e6dcad8" />
 
 
 Select Multiple Step and then select “Create cds.lib File” as shown in the figure below
@@ -214,7 +213,7 @@ Save .lib file and select the correct option for cds.lib file format based on th
 Select “Don’t include any libraries (verilog design)” from “New cds.lib file” and click on “OK” as in the figure below.
 
 We are simulating a verilog design without using any libraries
-<img width="1719" height="915" alt="image" src="https://github.com/user-attachments/assets/52919b33-3a8d-42c7-b15d-6c0e7f6c69c4" />
+<img width="1721" height="914" alt="Image" src="https://github.com/user-attachments/assets/104f580b-714a-4e9c-bf59-5758d5fdebe5" />
 
 
 Click “OK” in the “nclaunch: Open Design Directory” window, as shown in the figure below
@@ -249,7 +248,7 @@ i.e Cadence IES command for compile: ncverilog +access+rwc -compile filename.v
 Left side select the file and in Tools: launch verilog compiler with current selection will get enable. Click it to compile the code
 
 Worklib is the directory where all the compiled codes are stored while Snapshot will have output of elaboration which in turn goes for simulation
-<img width="1722" height="913" alt="ChatGPT Image Sep 8, 2026, 10_30_28 PM" src="https://github.com/user-attachments/assets/01a7489f-fef6-4eee-a845-4a7a9e36c0b6" />
+
 
 
 #### Fig 4: Compiled database in WorkLib
@@ -308,8 +307,8 @@ Synthesis requires three files as follows,
 ##### Performing Synthesis
 
 ##### Synthesize Design
-<img width="2172" height="724" alt="image" src="https://github.com/user-attachments/assets/23167537-dac5-4974-aed8-6135904129a8" />
 
+<img width="2172" height="724" alt="Image" src="https://github.com/user-attachments/assets/1c1f4edc-ffba-4728-9214-af0386b18a56" />
 
 Run the synthesis Process one time for each code and make sure the output File names are changed accordingly
 
@@ -322,7 +321,7 @@ The Liberty files are present in the library path,
 • Genus Script file with .tcl file Extension commands are executed one by one to synthesize the netlist. Or use source run.tcl command in the terminal window to view the netlist, and a log file will be created in the working folder.
 
 #### Fig 8: Synthesis RTL Schematic using case and ifelseif construct
-<img width="1671" height="941" alt="image" src="https://github.com/user-attachments/assets/b8ab18cb-ab7d-4f4a-bd39-f1c57fe1e855" />
+<img width="1600" height="900" alt="image" src="https://github.com/user-attachments/assets/0fb264ee-2312-470e-bfa0-b1d02034dcb3" />
 
 
 #### Fig 9: Area report of case and ifelseif construct
@@ -337,6 +336,7 @@ The Liberty files are present in the library path,
 
 #### Fig 12: Tabulate Area,Power and Timing Report Comparision of ALU using case and ifelseif construct
 
-## Result
+## Result:
+
 The 32-bit ALU implemented using behavioural case statements and if–elseif constructs was successfully verified under Incisive (ncvlog/ncsim) for all tested vectors. Both implementations were functionally correct and synthesizable. Synthesis using Cadence Genus generated gate-level netlists along with area, timing, and power reports.
 A comparative analysis revealed that the case-statement-based ALU resulted in slightly lower area and better timing performance, while the if–elseif-based ALU exhibited higher logic complexity and marginally increased delay due to sequential decision evaluation. Both designs, however, produced identical functional outputs.
